@@ -1,3 +1,4 @@
+import os
 import json
 import argparse
 import pandas as pd
@@ -16,6 +17,8 @@ from .sampler.chat_completion_sampler import (
 )
 from .sampler.o_chat_completion_sampler import OChatCompletionSampler
 from .sampler.claude_sampler import ClaudeCompletionSampler, CLAUDE_SYSTEM_MESSAGE_LMSYS
+from .sampler.predibase_sampler import PredibaseChatCompletionSampler
+
 
 
 def main():
@@ -34,6 +37,13 @@ def main():
     args = parser.parse_args()
 
     models = {
+		"predibase-lora": PredibaseChatCompletionSampler(
+			base_url=os.environ['PREDIBASE_ENDPOINT'],
+			adapter_id="stratos-solver-model/6",
+			api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
+            adapter_source="pbase",
+			max_tokens=1024
+		),
         # chatgpt models:
         "gpt-4o-2024-11-20_assistant": ChatCompletionSampler(
             model="gpt-4o-2024-11-20",
@@ -107,9 +117,10 @@ def main():
             print(f"Error: Model '{args.model}' not found.")
             return
         models = {args.model: models[args.model]}
+        print("models=", models)
 
-    grading_sampler = ChatCompletionSampler(model="gpt-4o")
-    equality_checker = ChatCompletionSampler(model="gpt-4-turbo-preview")
+    grading_sampler = ChatCompletionSampler(model="gpt-4o-mini")
+    equality_checker = ChatCompletionSampler(model="gpt-4o-mini")
     # ^^^ used for fuzzy matching, just for math
 
     def get_evals(eval_name, debug_mode):
