@@ -37,21 +37,21 @@ def main():
     args = parser.parse_args()
 
     models = {
-		"predibase-solar-mini": PredibaseChatCompletionSampler(
-			base_url=os.environ['PREDIBASE_ENDPOINT'],
-			adapter_id="",
-			api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
+        "predibase-solar-mini": PredibaseChatCompletionSampler(
+            base_url=os.environ['PREDIBASE_ENDPOINT'],
+            adapter_id="",
+            api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
             adapter_source="pbase",
-			max_tokens=1024
-		),
+            max_tokens=1024
+        ),
 
-		"predibase-lora": PredibaseChatCompletionSampler(
-			base_url=os.environ['PREDIBASE_ENDPOINT'],
-			adapter_id="stratos-solver-model/6",
-			api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
+        "predibase-lora": PredibaseChatCompletionSampler(
+            base_url=os.environ['PREDIBASE_ENDPOINT'],
+            adapter_id="stratos-solver-model/6",
+            api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
             adapter_source="pbase",
-			max_tokens=1024
-		),
+            max_tokens=1024
+        ),
         # chatgpt models:
         "gpt-4o-2024-11-20_assistant": ChatCompletionSampler(
             model="gpt-4o-2024-11-20",
