@@ -127,8 +127,20 @@ def main():
         models = {args.model: models[args.model]}
         print("models=", models)
 
-    grading_sampler = ChatCompletionSampler(model="gpt-4o-mini")
-    equality_checker = ChatCompletionSampler(model="gpt-4o-mini")
+    #grading_sampler = ChatCompletionSampler(model="gpt-4o-mini")
+    #equality_checker = ChatCompletionSampler(model="gpt-4o-mini")
+    # Using Solar-pro
+    print("0:", os.environ['UPSTAGE_API_KEY'])
+    grading_sampler = ChatCompletionSampler(
+                            model="solar-pro",
+                            base_url="https://api.upstage.ai/v1/solar",
+                            api_key=os.environ['UPSTAGE_API_KEY']
+                        )
+    equality_checker = ChatCompletionSampler(
+                            model="solar-pro",
+                            base_url="https://api.upstage.ai/v1/solar",
+                            api_key=os.environ['UPSTAGE_API_KEY']
+                        )
     # ^^^ used for fuzzy matching, just for math
 
     def get_evals(eval_name, debug_mode):

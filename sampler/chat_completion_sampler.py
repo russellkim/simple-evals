@@ -1,3 +1,4 @@
+import os
 import base64
 import time
 from typing import Any
@@ -25,10 +26,19 @@ class ChatCompletionSampler(SamplerBase):
         system_message: str | None = None,
         temperature: float = 0.5,
         max_tokens: int = 1024,
+        base_url: str | None = None,
+        api_key = None
     ):
         self.api_key_name = "OPENAI_API_KEY"
-        self.client = OpenAI()
-        # using api_key=os.environ.get("OPENAI_API_KEY")  # please set your API_KEY
+        if api_key == None:
+            api_key=os.environ.get("OPENAI_API_KEY")  # please set your API_KEY
+        else:
+            api_key=api_key
+        print("1:", api_key)
+        self.client = OpenAI(
+                        base_url=base_url,  # Set custom base URL for API-compatible endpoints
+                        api_key=api_key
+                        )
         self.model = model
         self.system_message = system_message
         self.temperature = temperature
