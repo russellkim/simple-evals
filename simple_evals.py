@@ -47,7 +47,7 @@ def main():
 
         "predibase-lora": PredibaseChatCompletionSampler(
             base_url=os.environ['PREDIBASE_ENDPOINT'],
-            adapter_id="stratos-solver-model/6",
+            adapter_id=os.environ['ADAPTER_ID'],
             api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
             adapter_source="pbase",
             max_tokens=1024
