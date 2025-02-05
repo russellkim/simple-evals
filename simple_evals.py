@@ -52,6 +52,16 @@ def main():
             adapter_source="pbase",
             max_tokens=1024
         ),
+
+        "predibase-deepssek-r1-qwen-32b": PredibaseChatCompletionSampler(
+            base_url=os.environ['PREDIBASE_ENDPOINT'],
+            adapter_id=os.environ['ADAPTER_ID'],
+            api_key=os.environ['PREDIBASE_API_TOKEN'],  # Pass the token directly
+            adapter_source="pbase",
+            max_tokens=1024
+        ),
+
+
         # chatgpt models:
         "gpt-4o-2024-11-20_assistant": ChatCompletionSampler(
             model="gpt-4o-2024-11-20",
