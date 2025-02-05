@@ -34,7 +34,6 @@ class ChatCompletionSampler(SamplerBase):
             api_key=os.environ.get("OPENAI_API_KEY")  # please set your API_KEY
         else:
             api_key=api_key
-        print("1:", api_key)
         self.client = OpenAI(
                         base_url=base_url,  # Set custom base URL for API-compatible endpoints
                         api_key=api_key

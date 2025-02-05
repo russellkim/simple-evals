@@ -125,12 +125,10 @@ def main():
             print(f"Error: Model '{args.model}' not found.")
             return
         models = {args.model: models[args.model]}
-        print("models=", models)
 
     #grading_sampler = ChatCompletionSampler(model="gpt-4o-mini")
     #equality_checker = ChatCompletionSampler(model="gpt-4o-mini")
     # Using Solar-pro
-    print("0:", os.environ['UPSTAGE_API_KEY'])
     grading_sampler = ChatCompletionSampler(
                             model="solar-pro",
                             base_url="https://api.upstage.ai/v1/solar",
@@ -182,9 +180,7 @@ def main():
         eval_name: get_evals(eval_name, args.debug)
         for eval_name in ["simpleqa", "mmlu", "math", "gpqa", "mgsm", "drop", "humaneval"]
     }
-    print(evals)
     debug_suffix = "_DEBUG" if args.debug else ""
-    print(debug_suffix)
     mergekey2resultpath = {}
     for model_name, sampler in models.items():
         for eval_name, eval_obj in evals.items():
